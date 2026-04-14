@@ -1,0 +1,506 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --bg: #FFF9E6;
+  --surface: #FFE500;
+  --panel: #FFFFFF;
+  --border: #000000;
+  --bw: 3px;
+  --accent: #FF1E1E;
+  --blue: #0055FF;
+  --text: #000000;
+  --shadow-sm: 4px 4px 0 #000;
+  --shadow: 6px 6px 0 #000;
+  --shadow-lg: 9px 9px 0 #000;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  background-image: radial-gradient(circle, rgba(0,0,0,0.13) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
+  color: var(--text);
+  font-family: 'Comic Neue', cursive;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  height: 100vh;
+}
+
+/* ── Layout ── */
+
+.app {
+  display: grid;
+  grid-template-columns: 390px 1fr;
+  height: 100vh;
+}
+
+.app-sidebar {
+  background: var(--surface);
+  border-right: var(--bw) solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 44px 36px;
+  overflow-y: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.app-canvas {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel);
+  background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ── Decorative burst ── */
+
+.comic-burst {
+  position: absolute;
+  top: 40px;
+  right: 48px;
+  width: 90px;
+  height: 90px;
+  background: var(--accent);
+  border: var(--bw) solid var(--border);
+  box-shadow: var(--shadow-sm);
+  clip-path: polygon(
+    50% 0%, 61% 30%, 93% 18%, 74% 46%,
+    100% 50%, 74% 54%, 93% 82%, 61% 70%,
+    50% 100%, 39% 70%, 7% 82%, 26% 54%,
+    0% 50%, 26% 46%, 7% 18%, 39% 30%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: burst-spin 8s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.comic-burst span {
+  font-family: 'Bangers', cursive;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  color: white;
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.4);
+  text-align: center;
+  line-height: 1.1;
+}
+
+@keyframes burst-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ── Brand ── */
+
+.app-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.app-label {
+  font-family: 'Comic Neue', cursive;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: rgba(0,0,0,0.55);
+  text-transform: uppercase;
+  background: rgba(0,0,0,0.08);
+  border: 1.5px solid rgba(0,0,0,0.2);
+  padding: 4px 10px;
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 10px;
+}
+
+.app-title {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(56px, 5vw, 76px);
+  line-height: 0.88;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  -webkit-text-stroke: 1.5px black;
+  paint-order: stroke fill;
+  text-shadow:
+    5px 5px 0 rgba(255,30,30,0.5),
+    10px 10px 0 rgba(255,30,30,0.15);
+  margin-bottom: 22px;
+}
+
+.app-description {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.65;
+  background: white;
+  border: var(--bw) solid var(--border);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  margin-top: 18px;
+}
+
+/* Speech bubble tail (pointing up) */
+.app-description::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 22px;
+  width: 0;
+  height: 0;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 15px solid var(--border);
+}
+
+.app-description::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 25px;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 10px solid white;
+}
+
+/* ── Controls ── */
+
+.app-controls {
+  margin-top: auto;
+  padding-top: 48px;
+}
+
+.app-footer {
+  padding-top: 28px;
+}
+
+/* ── Form ── */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-family: 'Bangers', cursive;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  text-transform: uppercase;
+}
+
+.form-input {
+  width: 100%;
+  background: white;
+  border: var(--bw) solid var(--border);
+  color: var(--text);
+  font-family: 'Comic Neue', cursive;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 12px 14px;
+  outline: none;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.12s ease, transform 0.12s ease;
+}
+
+.form-input::placeholder {
+  color: rgba(0,0,0,0.3);
+  font-weight: 400;
+  font-style: italic;
+}
+
+.form-input:focus {
+  box-shadow: 6px 6px 0 var(--blue);
+  transform: translate(-2px, -2px);
+}
+
+.form-input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.form-button {
+  width: 100%;
+  background: var(--accent);
+  border: var(--bw) solid var(--border);
+  color: white;
+  font-family: 'Bangers', cursive;
+  font-size: 24px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 16px 24px;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.1s ease, transform 0.1s ease;
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.3);
+}
+
+.form-button:hover:not(:disabled) {
+  box-shadow: 3px 3px 0 #000;
+  transform: translate(3px, 3px);
+}
+
+.form-button:active:not(:disabled) {
+  box-shadow: none;
+  transform: translate(6px, 6px);
+}
+
+.form-button:disabled {
+  background: rgba(0,0,0,0.12);
+  color: rgba(0,0,0,0.35);
+  cursor: not-allowed;
+  box-shadow: none;
+  -webkit-text-stroke: none;
+}
+
+/* ── Image Display ── */
+
+.image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 52px;
+}
+
+.image-frame {
+  width: 100%;
+  max-width: min(calc(100vh - 104px), 640px);
+  aspect-ratio: 1;
+  border: var(--bw) solid var(--border);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  background: white;
+}
+
+/* ── Empty State ── */
+
+.image-empty-state {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: white;
+  position: relative;
+}
+
+/* Ben-Day dots overlay */
+.image-empty-state::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0,0,100,0.06) 2px, transparent 2px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.image-empty-icon {
+  width: 76px;
+  height: 76px;
+  background: var(--surface);
+  border: var(--bw) solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  position: relative;
+  z-index: 1;
+}
+
+.image-empty-text {
+  font-family: 'Bangers', cursive;
+  font-size: 24px;
+  letter-spacing: 0.12em;
+  color: rgba(0,0,0,0.35);
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Result Image ── */
+
+.image-result {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: image-reveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes image-reveal {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── Loading State ── */
+
+.image-loading {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Moving diagonal stripes */
+.image-loading-shimmer {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--surface)         0px,
+    var(--surface)         24px,
+    rgba(255,255,255,0.85) 24px,
+    rgba(255,255,255,0.85) 48px
+  );
+  animation: stripes 0.5s linear infinite;
+}
+
+@keyframes stripes {
+  from { background-position: 0 0; }
+  to   { background-position: 68px 0; }
+}
+
+/* "LOADING..." floating badge */
+.image-loading-label {
+  position: relative;
+  z-index: 10;
+  font-family: 'Bangers', cursive;
+  font-size: 40px;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  background: white;
+  border: var(--bw) solid var(--border);
+  padding: 10px 28px;
+  box-shadow: var(--shadow);
+  animation: label-pulse 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes label-pulse {
+  from { transform: rotate(-3deg) scale(1); }
+  to   { transform: rotate(2deg) scale(1.06); }
+}
+
+/* ── Error State ── */
+
+.image-error {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--accent);
+  border-top: var(--bw) solid var(--border);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.image-error-dot {
+  font-family: 'Bangers', cursive;
+  font-size: 20px;
+  color: white;
+  letter-spacing: 0.05em;
+  -webkit-text-stroke: 0.5px rgba(0,0,0,0.4);
+}
+
+.image-error-text {
+  font-family: 'Comic Neue', cursive;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: white;
+  text-transform: uppercase;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 768px) {
+  body, html {
+    height: auto;
+    overflow: auto;
+  }
+
+  #root {
+    height: auto;
+  }
+
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .app-sidebar {
+    padding: 36px 24px;
+    overflow: visible;
+  }
+
+  .app-title {
+    font-size: 64px;
+  }
+
+  .app-controls {
+    margin-top: 0;
+    padding-top: 36px;
+  }
+
+  .app-canvas {
+    min-height: 360px;
+  }
+
+  .image-container {
+    padding: 32px 24px;
+  }
+
+  .image-frame {
+    max-width: 100%;
+  }
+
+  .comic-burst {
+    top: 20px;
+    right: 20px;
+    width: 70px;
+    height: 70px;
+  }
+
+  .comic-burst span {
+    font-size: 12px;
+  }
+}
