@@ -16,7 +16,7 @@ export default function useImageGeneration() {
         `https://gen.pollinations.ai/image/a%20${prompt}%20in%20space?model=flux`,
         {
           headers: {
-            "Authorization": `Bearer sk_yoF0ixbapb9EIzEG0qZzr484a6jUrz4v`,
+            "Authorization": `Bearer ${import.meta.env.VITE_HF_TOKEN}`,
           },
         },
       );
