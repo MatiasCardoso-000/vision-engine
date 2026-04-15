@@ -13,7 +13,7 @@ export default function useImageGeneration() {
 
     try {
       const response = await fetch(
-        `https://gen.pollinations.ai/image/a%20${prompt}%20in%20space?model=flux`,
+        `https://gen.pollinations.ai/image/a%20${prompt}%20in%20space?model=zimage`,
         {
           headers: {
             "Authorization": `Bearer ${import.meta.env.VITE_HF_TOKEN}`,
